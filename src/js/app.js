@@ -8,7 +8,7 @@ const submitButton = form.querySelector(".form__submit-button");
 
 //Declaring variables
 
-const contacts = [];
+const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 
 const addContacts = (e) => {
   e.preventDefault();
@@ -21,8 +21,15 @@ const addContacts = (e) => {
     contactAddress: addressInput.value,
   };
   contacts.push(contact);
+  storeContacts(contacts);
   console.log(contacts);
+};
+
+const storeContacts = (contactsArray) => {
+  localStorage.setItem("contacts", JSON.stringify(contactsArray));
 };
 
 //Add event listener to the form
 form.addEventListener("submit", addContacts);
+
+console.log(contacts);
