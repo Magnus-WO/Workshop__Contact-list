@@ -1,7 +1,7 @@
 /* Importing fonts */
 @font-face {
-  font-family: bokor-regular;
-  src: url(../assets/fonts/Bokor-Regular.ttf);
+  font-family: orbitron-regular;
+  src: url(../assets/fonts/Orbitron-Regular.ttf);
 }
 
 @font-face {
@@ -68,28 +68,108 @@ img {
   width: 100%;
   height: 32px;
   padding: 0 var(--spacing-small);
-  border-radius: var(--border-radius-medium);
+  border-radius: var(--border-radius-small);
 }
 
 .form__address-input {
   resize: none;
   padding: var(--spacing-small);
-
+  border-radius: var(--border-radius-small);
   font-family: inherit;
 }
 
 .form__submit-button {
   height: 32px;
   cursor: pointer;
-  font-family: bokor-regular;
+  font-family: orbitron-regular;
 
   background-color: var(--color-add-button);
   color: white;
   border: none;
-  border-radius: var(--border-radius-medium);
+  border-radius: var(--border-radius-small);
   font-size: var(--font-size-base);
 }
 
 .form__submit-button:hover {
   opacity: 0.9;
+}
+
+/* Styles for the display section */
+.contact-app__display-contacts {
+  flex-basis: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for the search */
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 10%;
+
+  padding: var(--spacing-medium);
+  background-color: var(--color-search);
+  gap: var(--spacing-small);
+}
+
+.search__input,
+.search__filter {
+  padding: 0 var(--spacing-small);
+  border-radius: var(--border-radius-small);
+  height: 32px;
+  width: 160px;
+  font-family: inherit;
+}
+
+/* Styles for the contact list display */
+.contacts {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  background-color: var(--color-contacts);
+  padding: var(--spacing-medium);
+}
+
+.contacts__header {
+  display: flex;
+  width: 100%;
+  padding: var(--spacing-small);
+  background-color: var(--color-header);
+
+  font-family: orbitron-regular;
+  font-size: var(--font-size-base);
+  border-radius: var(--border-radius-small);
+}
+
+.contacts__header span {
+  padding: var(--spacing-small);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacts__header span:not(:last-child) {
+  border-right: 1px solid black;
+}
+
+.contacts__header--list-number {
+  flex-basis: 5%;
+}
+
+.contacts__header--full-name {
+  flex-basis: 30%;
+}
+
+.contacts__header--phone {
+  flex-basis: 20%;
+}
+
+.contacts__header--address {
+  flex-basis: 30%;
+}
+
+.contacts__header--controls {
+  flex-basis: 15%;
 }
