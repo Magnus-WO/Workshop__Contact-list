@@ -1,0 +1,95 @@
+/* Importing fonts */
+@font-face {
+  font-family: bokor-regular;
+  src: url(../assets/fonts/Bokor-Regular.ttf);
+}
+
+@font-face {
+  font-family: raleway-regular;
+  src: url(../assets/fonts/Raleway-Regular.ttf);
+}
+
+/* Main layout styles */
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+.contact-app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+
+  font-family: raleway-regular;
+  background-color: aliceblue;
+}
+
+.contact-app__display-contacts {
+  flex-basis: 75%;
+  background-color: cadetblue;
+}
+
+img {
+  width: 4rem;
+  height: 5rem;
+}
+
+/* Styles for form */
+.contact-app__form-container {
+  flex-basis: 25%;
+  height: 100vh;
+  background-color: forestgreen;
+}
+.contact-app__form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-form);
+}
+
+.form__logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 10%;
+
+  margin: var(--spacing-medium);
+}
+
+.form__input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  padding: var(--spacing-large);
+  flex-grow: 1;
+}
+
+.form__input {
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--spacing-small);
+  border-radius: var(--border-radius-medium);
+}
+
+.form__address-input {
+  resize: none;
+  padding: var(--spacing-small);
+
+  font-family: inherit;
+}
+
+.form__submit-button {
+  height: 32px;
+  cursor: pointer;
+  font-family: bokor-regular;
+
+  background-color: var(--color-add-button);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-medium);
+  font-size: var(--font-size-base);
+}
+
+.form__submit-button:hover {
+  opacity: 0.9;
+}
