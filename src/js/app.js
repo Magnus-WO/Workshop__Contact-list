@@ -7,6 +7,8 @@ const addressInput = form.querySelector("[name='address']");
 const submitButton = form.querySelector(".form__submit-button");
 
 const contactList = document.querySelector(".contacts__list");
+const searchInput = document.querySelector(".search__input");
+const searchOption = document.querySelector(".search__filter");
 
 //Declaring variables
 
@@ -43,12 +45,13 @@ const deleteContacts = (id) => {
   const contacts = JSON.parse(localStorage.getItem("contacts"));
   const remainingContacts = contacts.filter((contact) => contact.id !== id);
   storeContacts(remainingContacts);
-  contactList.textContent = "";
   renderContacts(remainingContacts);
 };
 
 //Function for rendering the contacts on the dom
 const renderContacts = (contactsArray) => {
+  contactList.textContent = "";
+
   contactsArray.forEach((contact, index) => {
     //Create element
     const contactItem = document.createElement("li");
@@ -95,7 +98,22 @@ const renderContacts = (contactsArray) => {
 };
 
 //Add event listener to the form
-
 form.addEventListener("submit", addContacts);
 
-console.log(contacts);
+//Add event listener to the search input and make it functional
+searchInput.addEventListener("input", (e) => {
+  const searchQuery = e.target.value.toLowerCase();
+  const searchOptionValue = searchOption.value;
+  const filteredArray = contacts.filter((contact) => {
+    if (searchOptionValue === "firstname") {
+      return contact.contactFirstname.toLowerCase().startsWith(searchQuery);
+    } else if (searchOptionValue === "lastname") {
+      return contact.contactLastname.toLowerCase().startsWith(searchQuery);
+    } else if (searchOptionValue === "phone") {
+      return contact.contactPhoneNumber.toLowerCase().startsWith(searchQuery);
+    } else {
+      return;
+    }
+  });
+  renderContacts(filteredArray);
+});
