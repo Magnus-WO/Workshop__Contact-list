@@ -37,6 +37,16 @@ const addContacts = (e) => {
 const storeContacts = (contactsArray) => {
   localStorage.setItem("contacts", JSON.stringify(contactsArray));
 };
+
+//Function for deleting contacts from the list
+const deleteContacts = (id) => {
+  const contacts = JSON.parse(localStorage.getItem("contacts"));
+  const remainingContacts = contacts.filter((contact) => contact.id !== id);
+  storeContacts(remainingContacts);
+  contactList.textContent = "";
+  renderContacts(remainingContacts);
+};
+
 //Function for rendering the contacts on the dom
 const renderContacts = (contactsArray) => {
   contactsArray.forEach((contact, index) => {
@@ -78,6 +88,9 @@ const renderContacts = (contactsArray) => {
     contactPhoneNumber.classList.add("contacts-item__phone");
     contactAddress.classList.add("contacts-item__address");
     contactTools.classList.add("contacts-item__controls");
+
+    //Adding eventlistener to the delete and edit button
+    deleteButton.addEventListener("click", () => deleteContacts(contact.id));
   });
 };
 
