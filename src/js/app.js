@@ -11,8 +11,8 @@ const searchInput = document.querySelector(".search__input");
 const searchOption = document.querySelector(".search__filter");
 
 //Declaring variables
-
 const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+let editContactId = null;
 
 //Rendering contacts when the window is loading
 
@@ -21,18 +21,30 @@ document.addEventListener("DOMContentLoaded", () => renderContacts(contacts));
 //Function for adding the contacts
 const addContacts = (e) => {
   e.preventDefault();
+
   contactList.textContent = "";
   const contact = {
-    id: Date.now(),
+    id: editContactId || Date.now(),
     contactFirstname: firstnameInput.value,
     contactLastname: lastnameInput.value,
     contactPhoneNumber: phoneInput.value,
     contactAddress: addressInput.value,
   };
-  contacts.push(contact);
+
+  if (editContactId) {
+    const contactIndex = contacts.findIndex(
+      (contact) => contact.id === editContactId
+    );
+    if (contactIndex !== -1) {
+      contacts[contactIndex] = contact;
+    }
+    editContactId = null;
+  } else {
+    contacts.push(contact);
+  }
   storeContacts(contacts);
   renderContacts(contacts);
-  console.log(contacts);
+  form.reset();
 };
 
 //Function for storing the contacts in localStorage
@@ -46,6 +58,25 @@ const deleteContacts = (id) => {
   const remainingContacts = contacts.filter((contact) => contact.id !== id);
   storeContacts(remainingContacts);
   renderContacts(remainingContacts);
+};
+
+//Function for editing contacts
+const editContacts = (e, id) => {
+  const contactToEdit = contacts.find((contact) => contact.id === id);
+  const contactRow = e.target.closest(".contacts-container");
+  if (contactToEdit) {
+    firstnameInput.value = contactToEdit.contactFirstname;
+    lastnameInput.value = contactToEdit.contactLastname;
+    phoneInput.value = contactToEdit.contactPhoneNumber;
+    addressInput.value = contactToEdit.contactAddress;
+
+    editContactId = id;
+    submitButton.textContent = "Update contact";
+    contactRow.style.backgroundColor = "#FFFED3";
+  } else {
+    submitButton.textContent = "Add contact";
+    contactRow.style.backgroundColor = "#7ab2d3";
+  }
 };
 
 //Function for rendering the contacts on the dom
@@ -94,6 +125,7 @@ const renderContacts = (contactsArray) => {
 
     //Adding eventlistener to the delete and edit button
     deleteButton.addEventListener("click", () => deleteContacts(contact.id));
+    editButton.addEventListener("click", (e) => editContacts(e, contact.id));
   });
 };
 
