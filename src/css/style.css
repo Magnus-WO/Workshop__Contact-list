@@ -141,6 +141,8 @@ img {
   font-family: orbitron-regular;
   font-size: var(--font-size-base);
   border-radius: var(--border-radius-small);
+
+  box-shadow: 10px 10px 20px black;
 }
 
 .contacts__header span {
